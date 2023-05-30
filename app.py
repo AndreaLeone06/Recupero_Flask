@@ -6,10 +6,13 @@ df=pd.read_csv("https://dati.comune.milano.it/dataset/108af032-bd90-481d-a08d-f9
 
 @app.route('/')
 def home():
-    return render_template('home.html')
+    return render_template('home.html', df=df)
 
 @app.route('/result')
 def result():
     schName = request.args.get('school')
     scelta=df[df.DenominazioneIstitutoRiferimento==schName.upper()]
-    return render_template('result.html')
+    return render_template('result.html', scelta=scelta)
+
+if __name__ == '__main__':
+    app.run(debug=True)
